@@ -21,32 +21,38 @@ function playRound(playerSelection, computerSelection){
     // Make playerSelection lowercase
     playerSelection = playerSelection.toLowerCase();
     // If player=rock and computer=paper, computer wins
-    if (playerSelection === 'rock' && computerSelection === 'paper') {
+    if (playerSelection === 'rock'
+        && computerSelection === 'paper') {
         console.log('You Lose! Paper beats Rock');
         return('computer');
     }
     // If player=rock and computer=scissors, player wins
-    else if (playerSelection === 'rock' && computerSelection === 'scissors') {
+    else if (playerSelection === 'rock'
+        && computerSelection === 'scissors') {
         console.log('You Win! Rock beats Scissors');
         return('player');
     }
     // If player=paper and computer=rock, player wins
-    else if (playerSelection === 'paper' && computerSelection === 'rock') {
+    else if (playerSelection === 'paper'
+        && computerSelection === 'rock') {
         console.log('You Win! Paper beats Rock');
         return('player');
     }
     // If player=paper and computer=scissors, computer wins
-    else if (playerSelection === 'paper' && computerSelection === 'scissors') {
+    else if (playerSelection === 'paper'
+        && computerSelection === 'scissors') {
         console.log('You Lose! Scissors beats Paper');
         return('computer');
     }
     // If player=scissors and computer=rock, computer wins
-    else if (playerSelection === 'scissors' && computerSelection === 'rock') {
+    else if (playerSelection === 'scissors'
+        && computerSelection === 'rock') {
         console.log('You Lose! Rock beats Scissors');
         return('computer');
     }
     // If player=scissors and computer=paper, player wins
-    else if (playerSelection === 'scissors' && computerSelection === 'paper') {
+    else if (playerSelection === 'scissors'
+        && computerSelection === 'paper') {
         console.log('You Win! Scissors beats Paper');
         return('player');
     }
