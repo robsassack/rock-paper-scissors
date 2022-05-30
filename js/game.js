@@ -2,6 +2,8 @@ const rockButton = document.querySelector('.rock');
 const paperButton = document.querySelector('.paper');
 const scissorsButton = document.querySelector('.scissors');
 const currentScore = document.querySelector('.current-score');
+const reset = document.querySelector('.reset');
+const results = document.querySelector('.results');
 // Set score for player and computer
 let playerScore = 0;
 let computerScore = 0;
@@ -30,7 +32,6 @@ function playRound(playerSelection, computerSelection){
     if (gameStatus === false) {
         return;
     }
-    const results = document.querySelector('.results');
     // If player=rock and computer=paper, computer wins
     if (playerSelection === 'rock'
         && computerSelection === 'paper') {
@@ -74,55 +75,34 @@ function playRound(playerSelection, computerSelection){
     currentScore.textContent = `Player ${playerScore} : ${computerScore} Computer`;
     if (playerScore === 5) {
         results.textContent = 'You beat the computer!';
-        gameStatus = false;
+        endGame();
     } else if (computerScore === 5) {
         results.textContent = 'The computer beat you!';
-        gameStatus = false;
+        endGame();
     }
     return;
 }
 
-// function game(){
-    // // Play up to 10 games
-    // for (let i = 0; i < 5; i++){
-    //     console.log(`Round ${i+1}!`);
-    //     // Prompt user for rock, paper, or scissors
-    //     let userInput = prompt("Pick rock, paper, or scissors");
-    //     // Verify user has input rock, paper, or scissors correctly
-    //     while (!(userInput === 'rock')
-    //         && !(userInput === 'paper')
-    //         && !(userInput === 'scissors')) {
-    //         userInput = prompt('Please input rock, paper, or scissors');
-    //     }
-    //     // Play a round and generate computer's move
-    //     let roundResult = playRound(userInput, computerPlay());
-    //     switch(roundResult) {
-    //         case 'player':
-    //             playerScore++;
-    //             break;
-    //         case 'computer':
-    //             computerScore++;
-    //             break;
-    //         default:
-    //             break;
-    //     }
-    //     // After a round, display the score
-    //     console.log(`Current score: You ${playerScore}:${computerScore} Computer`);
-    // }
+// create button to allow player to play again
+function endGame() {
+    gameStatus = false;
+    const restartButton = document.createElement('button');
+    restartButton.textContent = 'Play Again';
+    reset.appendChild(restartButton);
+    restartButton.addEventListener('click', () => {
+        reset.removeChild(restartButton);
+        resetGame();
+    });
+}
 
-
-
-    // Show final score after all rounds completed
-    // if (playerScore > computerScore) {
-    //     console.log("You beat the computer!");
-    // } else if (playerScore < computerScore) {
-    //     console.log("The computer beat you!");
-    // } else {
-    //     console.log("You tied with the computer!");
-    // }
-// }
-
-// game()
+// set values back to default to let player start again
+function resetGame() {
+    playerScore = 0;
+    computerScore = 0;
+    gameStatus = true;
+    currentScore.textContent = `Player ${playerScore} : ${computerScore} Computer`;
+    results.textContent = '';
+}
 
 rockButton.addEventListener('click', () => {
     result = playRound('rock', computerPlay());
@@ -135,3 +115,4 @@ paperButton.addEventListener('click', () => {
 scissorsButton.addEventListener('click', () => {
     result = playRound('scissors', computerPlay());
 });
+
