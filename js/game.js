@@ -4,10 +4,10 @@ const scissorsButton = document.querySelector('.scissors');
 const currentScore = document.querySelector('.current-score');
 const reset = document.querySelector('.reset');
 const results = document.querySelector('.results');
+let gameStatus = true;
 // Set score for player and computer
 let playerScore = 0;
 let computerScore = 0;
-let gameStatus = true;
 
 // Generate computer's play
 function computerPlay(){
@@ -105,14 +105,14 @@ function resetGame() {
 }
 
 rockButton.addEventListener('click', () => {
-    result = playRound('rock', computerPlay());
+    playRound('rock', computerPlay());
 });
 
 paperButton.addEventListener('click', () => {
-    result = playRound('paper', computerPlay());
+    playRound('paper', computerPlay());
 });
 
 scissorsButton.addEventListener('click', () => {
-    result = playRound('scissors', computerPlay());
+    playRound('scissors', computerPlay());
 });
 
