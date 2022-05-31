@@ -4,7 +4,9 @@ const scissorsButton = document.querySelector('.scissors');
 const currentScore = document.querySelector('.current-score');
 const reset = document.querySelector('.reset');
 const results = document.querySelector('.results');
+const winner = document.querySelector('.winner');
 let gameStatus = true;
+let roundNum = 1;
 // Set score for player and computer
 let playerScore = 0;
 let computerScore = 0;
@@ -33,51 +35,54 @@ function playRound(playerSelection, computerSelection){
         return;
     }
     // If player=rock and computer=paper, computer wins
+    const newResult = document.createElement('div');
     if (playerSelection === 'rock'
         && computerSelection === 'paper') {
-        results.textContent = 'You Lose! Paper beats Rock';
+        newResult.textContent = `Round ${roundNum}: You Lose! Paper beats Rock`;
         computerScore++;
     }
     // If player=rock and computer=scissors, player wins
     else if (playerSelection === 'rock'
         && computerSelection === 'scissors') {
-        results.textContent = 'You Win! Rock beats Scissors';
+        newResult.textContent = `Round ${roundNum}: You Win! Rock beats Scissors`;
         playerScore++;
     }
     // If player=paper and computer=rock, player wins
     else if (playerSelection === 'paper'
         && computerSelection === 'rock') {
-        results.textContent = 'You Win! Paper beats Rock';
+        newResult.textContent = `Round ${roundNum}: You Win! Paper beats Rock`;
         playerScore++;
     }
     // If player=paper and computer=scissors, computer wins
     else if (playerSelection === 'paper'
         && computerSelection === 'scissors') {
-        results.textContent = 'You Lose! Scissors beats Paper';
+        newResult.textContent = `Round ${roundNum}: You Lose! Scissors beats Paper`;
         computerScore++;
     }
     // If player=scissors and computer=rock, computer wins
     else if (playerSelection === 'scissors'
         && computerSelection === 'rock') {
-        results.textContent = 'You Lose! Rock beats Scissors';
+        newResult.textContent = `Round ${roundNum}: You Lose! Rock beats Scissors`;
         computerScore++;
     }
     // If player=scissors and computer=paper, player wins
     else if (playerSelection === 'scissors'
         && computerSelection === 'paper') {
-        results.textContent = 'You Win! Scissors beats Paper';
+        newResult.textContent = `Round ${roundNum}: You Win! Scissors beats Paper`;
         playerScore++;
     }
     // If anything else happens, it's a tie
     else {
-        results.textContent = 'Tie game!';
+        newResult.textContent = `Round ${roundNum}: Tie game!`;
     }
-    currentScore.textContent = `Player ${playerScore} : ${computerScore} Computer`;
+    currentScore.textContent = `🧑 ${playerScore} : ${computerScore} 🤖`;
+    roundNum++;
+    results.appendChild(newResult);
     if (playerScore === 5) {
-        results.textContent = 'You beat the computer!';
+        winner.textContent = 'You beat the computer!';
         endGame();
     } else if (computerScore === 5) {
-        results.textContent = 'The computer beat you!';
+        winner.textContent = 'The computer beat you!';
         endGame();
     }
     return;
@@ -87,10 +92,12 @@ function playRound(playerSelection, computerSelection){
 function endGame() {
     gameStatus = false;
     const restartButton = document.createElement('button');
-    restartButton.textContent = 'Play Again';
+    reset.style.margin = '10px 0px';
+    restartButton.textContent = 'Play Again!';
     reset.appendChild(restartButton);
     restartButton.addEventListener('click', () => {
         reset.removeChild(restartButton);
+        reset.style.margin = '0px';
         resetGame();
     });
 }
@@ -99,9 +106,11 @@ function endGame() {
 function resetGame() {
     playerScore = 0;
     computerScore = 0;
+    roundNum = 1;
     gameStatus = true;
-    currentScore.textContent = `Player ${playerScore} : ${computerScore} Computer`;
+    currentScore.textContent = `🧑 ${playerScore} : ${computerScore} 🤖`;
     results.textContent = '';
+    winner.textContent = '';
 }
 
 rockButton.addEventListener('click', () => {
